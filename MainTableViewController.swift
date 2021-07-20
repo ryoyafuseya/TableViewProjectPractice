@@ -6,13 +6,37 @@
 //
 import UIKit
 
+class Player {
+    let name: String
+    let image: UIImage
+    
+    init(name: String, image: UIImage) {
+        self.name = name
+        self.image = image
+    }
+}
+
 class MainTableViewController: UITableViewController {
     
     private let cellId = "cellId"
-    private let players = [
-        ["James Harden", "Stephen Curry", "Lebron James", "Kylie Irving", "Luka Doncic", ],
-        ["James Harden", "Stephen Curry", "Lebron James", "Kylie Irving", "Luka Doncic", ],
-        ["James Harden", "Stephen Curry", "Lebron James", "Kylie Irving", "Luka Doncic", ],
+    private let players: [[Player]] = [
+        [.init(name: "James Harden", image: #imageLiteral(resourceName: "james_harden")),
+         .init(name: "Stephen Curry", image: #imageLiteral(resourceName: "vince_carter")),
+         .init(name: "Lebron James", image: #imageLiteral(resourceName: "lebron_james")),
+         .init(name: "Kylie Irving", image: #imageLiteral(resourceName: "kylie_ irving")),
+         .init(name: "Luka Doncic", image: #imageLiteral(resourceName: "luka_doncic"))],
+        
+        [.init(name: "James Harden", image: #imageLiteral(resourceName: "james_harden")),
+         .init(name: "Stephen Curry", image: #imageLiteral(resourceName: "vince_carter")),
+         .init(name: "Lebron James", image: #imageLiteral(resourceName: "lebron_james")),
+         .init(name: "Kylie Irving", image: #imageLiteral(resourceName: "kylie_ irving")),
+         .init(name: "Luka Doncic", image: #imageLiteral(resourceName: "luka_doncic"))],
+        
+        [.init(name: "James Harden", image: #imageLiteral(resourceName: "james_harden")),
+         .init(name: "Stephen Curry", image: #imageLiteral(resourceName: "vince_carter")),
+         .init(name: "Lebron James", image: #imageLiteral(resourceName: "lebron_james")),
+         .init(name: "Kylie Irving", image: #imageLiteral(resourceName: "kylie_ irving")),
+         .init(name: "Luka Doncic", image: #imageLiteral(resourceName: "luka_doncic"))],
     ]
     
     override func viewDidLoad() {
@@ -20,7 +44,7 @@ class MainTableViewController: UITableViewController {
         
         view.backgroundColor = .white
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(MainTableViewCell.self, forCellReuseIdentifier: cellId)
         setupNavigationBar()
         
         
@@ -57,7 +81,8 @@ extension MainTableViewController {
         let label = UILabel()
         label.text = "1990s"
         label.textAlignment = .center
-        label.backgroundColor = .darkGray
+        label.font = .boldSystemFont(ofSize: 20)
+        label.backgroundColor = .gray
         label.textColor = .white
         
         switch section {
@@ -83,9 +108,15 @@ extension MainTableViewController {
         return players[section].count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-        cell.textLabel?.text = players[indexPath.section][indexPath.row]
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->
+    UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as!
+            MainTableViewCell
+        
+        let player = players[indexPath.section][indexPath.row]
+        cell.nameLabel.text =  player.name
+        cell.playerImageView.image = player.image
+        
 
         return cell
     }
