@@ -20,20 +20,20 @@ class MainTableViewController: UITableViewController {
     
     private let cellId = "cellId"
     private let players: [[Player]] = [
-        [.init(name: "James Harden", image: #imageLiteral(resourceName: "james_harden")),
-         .init(name: "Stephen Curry", image: #imageLiteral(resourceName: "vince_carter")),
-         .init(name: "Lebron James", image: #imageLiteral(resourceName: "lebron_james")),
-         .init(name: "Kylie Irving", image: #imageLiteral(resourceName: "kylie_ irving")),
-         .init(name: "Luka Doncic", image: #imageLiteral(resourceName: "luka_doncic"))],
+        [.init(name: "Michael Jordan", image: #imageLiteral(resourceName: "michael_jordan")),
+         .init(name: "Scottie Pippen", image: #imageLiteral(resourceName: "scotti_pippen")),
+         .init(name: "John Stockton", image: #imageLiteral(resourceName: "john_stockton")),
+         .init(name: "Dennis Rodman", image: #imageLiteral(resourceName: "dennis_rodman")),
+         .init(name: "Hakeem Olajuwon", image: #imageLiteral(resourceName: "hakeen_olajuwon"))],
+        
+        [.init(name: "Kobe Bryant", image: #imageLiteral(resourceName: "kobe_bryant")),
+         .init(name: "Allen Iverson", image: #imageLiteral(resourceName: "allen_iverson")),
+         .init(name: "Shaquille O'Neal", image: #imageLiteral(resourceName: "shaquille_ o'Neal")),
+         .init(name: "Vince Carter", image: #imageLiteral(resourceName: "vince_carter")),
+         .init(name: "Steve Nash", image: #imageLiteral(resourceName: "steve_nash"))],
         
         [.init(name: "James Harden", image: #imageLiteral(resourceName: "james_harden")),
-         .init(name: "Stephen Curry", image: #imageLiteral(resourceName: "vince_carter")),
-         .init(name: "Lebron James", image: #imageLiteral(resourceName: "lebron_james")),
-         .init(name: "Kylie Irving", image: #imageLiteral(resourceName: "kylie_ irving")),
-         .init(name: "Luka Doncic", image: #imageLiteral(resourceName: "luka_doncic"))],
-        
-        [.init(name: "James Harden", image: #imageLiteral(resourceName: "james_harden")),
-         .init(name: "Stephen Curry", image: #imageLiteral(resourceName: "vince_carter")),
+         .init(name: "Stephen Curry", image: #imageLiteral(resourceName: "stephen_curry")),
          .init(name: "Lebron James", image: #imageLiteral(resourceName: "lebron_james")),
          .init(name: "Kylie Irving", image: #imageLiteral(resourceName: "kylie_ irving")),
          .init(name: "Luka Doncic", image: #imageLiteral(resourceName: "luka_doncic"))],
@@ -119,6 +119,23 @@ extension MainTableViewController {
         
 
         return cell
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let viewController = PlayerDitailViewController()
+        viewController.player = players[indexPath.section][indexPath.row]
+        
+        var generation = "1990s"
+        if indexPath.section == 1 {
+            generation = "2000s"
+            
+        }else if indexPath.section == 2{
+            generation = "2010s"
+        }
+        
+        viewController.generationLabel.text = generation
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
